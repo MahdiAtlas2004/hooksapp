@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from 'uuid'; 
 //using uuid for creating unique id for evey new song that we add to the webpage
+import { v4 as uuidv4 } from "uuid";
+import NewSongForm from "./NewSongForm";
+
 const SongList = () => {
   const [songs, setSongs] = useState([
     { title: "almost home", id: 1 },
@@ -8,8 +10,8 @@ const SongList = () => {
     { title: "this wild darkness", id: 3 },
   ]);
 
-  const addSong = () => {
-    setSongs([...songs, { title: "new song", id: uuidv4() }]);
+  const addSong = (title) => {
+    setSongs([...songs, { title, id: uuidv4() }]);
   };
   return (
     <div className="song-list">
@@ -18,7 +20,7 @@ const SongList = () => {
           return <li key={song.id}>{song.title}</li>;
         })}
       </ul>
-      <button onClick={addSong}>Add Song</button>
+      <NewSongForm addSong={addSong} />
     </div>
   );
 };
